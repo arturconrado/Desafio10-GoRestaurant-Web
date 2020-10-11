@@ -29,21 +29,18 @@ const Food: React.FC<IProps> = ({
   const [isAvailable, setIsAvailable] = useState(food.available);
 
   async function toggleAvailable(): Promise<void> {
-    // TODO UPDATE STATUS (available)
     try {
       await api.put(`/foods/${food.id}`, {
         ...food,
         available: !isAvailable,
       });
-
       setIsAvailable(!isAvailable);
-    } catch (err) {
-      console.log(err);
+    } catch {
+      throw new Error();
     }
   }
 
   function setEditingFood(): void {
-    // TODO - SET THE ID OF THE CURRENT ITEM TO THE EDITING FOOD AND OPEN MODA
     handleEditFood(food);
   }
 
